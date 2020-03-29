@@ -68,9 +68,9 @@ namespace XeroRefactor.Controllers
         [HttpPost]
         public async Task<ActionResult<Products>> PostProducts(Products products)
         {
-            await _productService.PostProducts(products);
+            return await _productService.PostProducts(products);
 
-            return CreatedAtAction("GetProducts", new { id = products.Id }, products);
+           
         }
 
         // DELETE: api/Products/5
