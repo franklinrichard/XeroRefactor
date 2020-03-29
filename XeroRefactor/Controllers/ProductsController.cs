@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using XeroRefactor;
 using XeroRefactor.Repositories;
 using XeroRefactor.Services;
@@ -18,12 +19,14 @@ namespace XeroRefactor.Controllers
         //private readonly productsContext _context;
 
         private readonly IProductService _productService;
+        private readonly ILogger<ProductsController> _logger;
 
 
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, ILogger<ProductsController> logger)
         {
             _productService = productService;
+            _logger = logger;
 
         }
 
@@ -31,6 +34,7 @@ namespace XeroRefactor.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Products>>> GetProducts()
         {
+            _logger.LogInformation("Get Products");
             return await _productService.GetProducts();
         }
 
