@@ -14,7 +14,7 @@ namespace XeroRefactor.Repositories
     {
         private readonly productsContext _context;
 
-        //private readonly IproductsContext _iproductsContext;
+        
         public ProductRepository(productsContext context)
         {
             _context = context;            
@@ -81,10 +81,10 @@ namespace XeroRefactor.Repositories
 
         public async  Task<IActionResult> PutProducts(string id, Products products)
         {
-            if (id != products.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != products.Id)
+            //{
+            //    return BadRequest();
+            //}
 
             _context.Entry(products).State = EntityState.Modified;
 

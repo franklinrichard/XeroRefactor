@@ -8,7 +8,7 @@ namespace XeroRefactor
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public byte[] Price { get; set; }
-        public byte[] DeliveryPrice { get; set; }
+        public decimal Price { get; set; }
+        public decimal DeliveryPrice { get; set; }
     }
 }

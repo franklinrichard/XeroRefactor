@@ -13,18 +13,18 @@ namespace XeroRefactor.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase 
+    public class ProductsController : ControllerBase
     {
         //private readonly productsContext _context;
 
         private readonly IProductService _productService;
 
-     
+
 
         public ProductsController(IProductService productService)
         {
             _productService = productService;
-            
+
         }
 
         // GET: api/Products
@@ -54,30 +54,12 @@ namespace XeroRefactor.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProducts(string id, Products products)
         {
-            if (id != products.Id)
+            if (String.Compare(id, products.Id, true) != 0)
             {
                 return BadRequest();
             }
-            return await _productService.PutProducts(id,products);
-            //_context.Entry(products).State = EntityState.Modified;
+            return await _productService.PutProducts(id, products);
 
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!ProductsExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
-            //return NoContent();
         }
 
         // POST: api/Products
@@ -86,23 +68,7 @@ namespace XeroRefactor.Controllers
         [HttpPost]
         public async Task<ActionResult<Products>> PostProducts(Products products)
         {
-             await _productService.PostProducts(products);
-            //_context.Products.Add(products);
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    if (ProductsExists(products.Id))
-            //    {
-            //        return Conflict();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            await _productService.PostProducts(products);
 
             return CreatedAtAction("GetProducts", new { id = products.Id }, products);
         }
@@ -113,16 +79,6 @@ namespace XeroRefactor.Controllers
         {
             return await _productService.DeleteProducts(id);
 
-            //var products = await _context.Products.FindAsync(id);
-            //if (products == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //_context.Products.Remove(products);
-            //await _context.SaveChangesAsync();
-
-            //return products;
         }
 
         private bool ProductsExists(string id)
