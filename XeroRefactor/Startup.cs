@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using XeroRefactor.Services;
+using XeroRefactor.Repositories;
 
 namespace XeroRefactor
 {
@@ -27,7 +29,13 @@ namespace XeroRefactor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<productsContext>(options => options.UseSqlite("Data Source=App_Data/products.db;"));
+            services.AddScoped(typeof(IProductService), typeof(ProductService));
+            services.AddScoped(typeof(IProductOptionsService), typeof(ProductOptionService));
+            services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+            services.AddScoped(typeof(IProductOptionsRepository), typeof(ProductOptionRepository));
+            
+            //services.AddDbContext<productsContext>(options => options.UseSqlite("Data Source=App_Data/products.db;"));
+            services.AddDbContext<productsContext>(options => options.UseSqlite(Configuration.GetConnectionString("Products")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
