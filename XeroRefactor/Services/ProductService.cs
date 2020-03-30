@@ -26,7 +26,7 @@ namespace XeroRefactor.Services
 
         }
 
-        public Task<ActionResult<IEnumerable<Products>>> GetProducts()
+        public Task<IEnumerable<Products>> GetProducts()
         {
             return _productRepository.GetProducts();
         }

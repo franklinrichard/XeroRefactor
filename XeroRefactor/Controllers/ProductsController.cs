@@ -32,7 +32,7 @@ namespace XeroRefactor.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Products>>> GetProducts()
+        public async Task<IEnumerable<Products>> GetProducts()
         {
             _logger.LogInformation("Get Products");
             return await _productService.GetProducts();
@@ -42,12 +42,10 @@ namespace XeroRefactor.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Products>> GetProducts(string id)
         {
+            _logger.LogInformation("Get Products for "+ id);
             var products = await _productService.GetProducts(id);
 
-            if (products == null)
-            {
-                return NotFound();
-            }
+           
 
             return products;
         }
@@ -58,10 +56,7 @@ namespace XeroRefactor.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProducts(string id, Products products)
         {
-            if (String.Compare(id, products.Id, true) != 0)
-            {
-                return BadRequest();
-            }
+            
             return await _productService.PutProducts(id, products);
 
         }

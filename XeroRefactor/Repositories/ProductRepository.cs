@@ -34,7 +34,7 @@ namespace XeroRefactor.Repositories
 
         }
 
-        public async Task<ActionResult<IEnumerable<Products>>> GetProducts()
+        public async Task<IEnumerable<Products>> GetProducts()
         {
             
             return await _context.Products.ToListAsync();
@@ -81,10 +81,10 @@ namespace XeroRefactor.Repositories
 
         public async  Task<IActionResult> PutProducts(string id, Products products)
         {
-            //if (id != products.Id)
-            //{
-            //    return BadRequest();
-            //}
+            if (String.Compare(id, products.Id, true) != 0)
+            {
+                return BadRequest();
+            }
 
             _context.Entry(products).State = EntityState.Modified;
 

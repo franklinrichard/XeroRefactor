@@ -37,11 +37,6 @@ namespace XeroRefactor.Controllers
 
             var productOptions = await _productOptionsService.GetProductOptions(id);
 
-            if (productOptions == null)
-            {
-                return NotFound();
-            }
-
             return productOptions;
         }
 
@@ -51,10 +46,7 @@ namespace XeroRefactor.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProductOptions(string id, ProductOptions productOptions)
         {
-            if (String.Compare(id, productOptions.Id, true) != 0)
-            {
-                return BadRequest();
-            }
+           
 
             return await _productOptionsService.PutProductOptions(id, productOptions);
             

@@ -76,10 +76,10 @@ namespace XeroRefactor.Repositories
 
         public async  Task<IActionResult> PutProductOptions(string id, ProductOptions productOptions)
         {
-            //if (id != productOptions.Id)
-            //{
-            //    return BadRequest();
-            //}
+            if (id != productOptions.Id)
+            {
+                return BadRequest();
+            }
 
             _context.Entry(productOptions).State = EntityState.Modified;
 
